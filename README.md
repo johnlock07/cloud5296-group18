@@ -1,5 +1,9 @@
 # Kubeadm Installation Guide
 
+The project has followed the installation guideline from yeshwanthlm to initiate a k8s cluster with AWS EC2 instances. After setting up the cluster, a sample machine learning script has been deployed as a load test to the cluster. On the high level, the script will loop training a simple neural network model and delete it. Then, Horizontal Pod Autoscaling (HPA) is used to autoscale and provide load balancing services to the cluster.
+
+Hence, it empowers the project to load test the cluster and verify if the system aligns with the project goals. The project goals include deploying a ML model on a EC2 cluster, with autoscaling and load balancing. k8s is the perfect tools for the project.
+
 This guide outlines the steps needed to set up a Kubernetes cluster using kubeadm.
 
 ## Pre-requisites:
@@ -119,9 +123,4 @@ Verify if it is working as expected!
 kubectl get nodes
 ```
 
-Link to the video tutorial: 
 
-Follow our tutorials here: https://www.youtube.com/@amonkincloud/videos \
-Follow my personal blog here: https://dev.to/yeshwanthlm/ \
-Follow us on Instagram: https://www.instagram.com/amonkincloud/ \
-For queries write to us at: amonkincloud@gmail.com 
