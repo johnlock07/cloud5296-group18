@@ -4,7 +4,7 @@ The project has followed the installation guideline from yeshwanthlm to initiate
 
 Hence, it empowers the project to load test the cluster and verify if the system aligns with the project goals. The project goals include deploying a ML model on a EC2 cluster, with autoscaling and load balancing. k8s is the perfect tools for the project.
 
-This guide outlines the steps needed to set up a Kubernetes cluster using kubeadm.
+The following guideline outlines the steps needed to set up a Kubernetes cluster using kubeadm.
 
 ## Pre-requisites:
 * Ubuntu OS (Xenial or later)
