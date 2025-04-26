@@ -123,7 +123,7 @@ Verify if it is working as expected!
 kubectl get nodes
 ```
 
-## Install Docker for Machine Learning Task
+## Full Steps on Configuring the Cluster and Deploying ML Tasks on it
 a) Snap is a package manager available on Ubuntu. There are many ways to install docker and snap is only one of them.
 
 ```bash
