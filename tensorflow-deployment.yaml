@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tensorflow-training
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tensorflow-training
+  template:
+    metadata:
+      labels:
+        app: tensorflow-training
+    spec:
+      containers:
+      - name: tensorflow-container
+        image: tensorflow/tensorflow:latest
+        command: ["sh", "-c", "while true; do python /workspace/train_and_delete.py; sleep 5; done"]
+        volumeMounts:
+        - name: script-volume
+          mountPath: /workspace  # Change this to a directory
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+      volumes:
+      - name: script-volume
+        configMap:
+          name: tensorflow-script
