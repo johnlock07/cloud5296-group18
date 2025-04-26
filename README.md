@@ -10,7 +10,7 @@ The following guideline outlines the steps needed to set up a Kubernetes cluster
 * Ubuntu OS (Xenial or later)
 * sudo privileges
 * AWS Account
-* Passion to Learn
+* EC2 instances (>= 2GB ram per instance, 2 CPUs for master node/ control plane)
 
 ### Master & Worker Node: 
 Run the following commands on both the master and worker nodes to prepare them for kubeadm.
