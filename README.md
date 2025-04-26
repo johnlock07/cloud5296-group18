@@ -6,6 +6,10 @@ Hence, it empowers the project to load test the cluster and verify if the system
 
 The following guideline outlines the steps needed to set up a Kubernetes cluster using kubeadm. Then setup load balancing and autoscaling services on the cluster.
 
+## System Diagram
+
+![image](https://github.com/johnlock07/cloud5296-group18/blob/main/K8S%20System%20Diagram.png?raw=true)
+
 ## Pre-requisites:
 * Ubuntu OS (Xenial or later)
 * sudo privileges
@@ -245,5 +249,9 @@ kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
 
 Check this [blog](https://medium.com/@cloudspinx/fix-error-metrics-api-not-available-in-kubernetes-aa10766e1c2f) for more details.
 
+## Credit
 
+[Kubeadm-Installation-Guide](https://github.com/yeshwanthlm/Kubeadm-Installation-Guide)
+
+[Fix “error: Metrics API not available” in Kubernetes](https://medium.com/@cloudspinx/fix-error-metrics-api-not-available-in-kubernetes-aa10766e1c2f)
 
