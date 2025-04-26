@@ -181,6 +181,11 @@ Commands for verifying the HPA
 kubectl get hpa
 kubectl describe hpa tensorflow-training
 ```
+Fof HPA to function properly, we need to install the metrics server, which could monitor CPU utilization of the instaces
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+Check [here](### If metrics server is not working) if the metics server is not working as expected.
 
 g) Monitor if the cluster autoscales and load balances according to workload
 ```bash
@@ -193,7 +198,7 @@ We could manually scale the deployment as well for immediate validation, where x
 kubectl scale deployment tensorflow-training --replicas=x
 ```
 
-extra) If metrics server is not working
+### If metrics server is not working
 Verify if it is available
 ```bash
 kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodes"
