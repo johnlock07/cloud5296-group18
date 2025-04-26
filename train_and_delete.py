@@ -5,7 +5,8 @@ import time
 
 def create_and_train_model():
     print("Starting model training...")
-    
+    start_time = time.time()  # Start the timer
+
     # Sample dataset
     X = np.random.rand(5000, 100)
     y = np.random.rand(5000, 1)
@@ -33,6 +34,8 @@ def create_and_train_model():
         os.system(f"rm -rf {model_path}")
 
     print("Restarting training loop...\n")
+    elapsed_time = time.time() - start_time  # End the timer and calculate elapsed time
+    print(f"completed in {elapsed_time:.2f} seconds.\n")
     time.sleep(2)  # Pause before next training cycle
 
 # Infinite training loop
