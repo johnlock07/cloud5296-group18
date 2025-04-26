@@ -111,7 +111,7 @@ b) Generate a token for worker nodes to join:
 
 c) Expose port 6443 in the Security group for the Worker to connect to Master Node
 
-### Slave Node (Only):
+### Worker Node (Only):
 
 a) Run the following commands on the worker node.
 
