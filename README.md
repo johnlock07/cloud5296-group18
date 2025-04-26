@@ -7,17 +7,15 @@ Hence, it empowers the project to load test the cluster and verify if the system
 The following guideline outlines the steps needed to set up a Kubernetes cluster using kubeadm. Then setup load balancing and autoscaling services on the cluster.
 
 ## Table of Contents
-- [CS5296 Project Group18](#cs5296-project-group18)
-  - [Table of Contents](#table-of-contents)
-  - [System Diagram](#system-diagram)
-  - [Pre-requisites:](#pre-requisites)
-    - [Master \& Slave Node:](#master--slave-node)
-    - [Master Node (Only):](#master-node-only)
-    - [Worker Node (Only):](#worker-node-only)
-  - [Full Steps on Configuring the Cluster and Deploying ML Tasks on it](#full-steps-on-configuring-the-cluster-and-deploying-ml-tasks-on-it)
-    - [If metrics server is not working](#if-metrics-server-is-not-working)
-  - [Useful Commands](#useful-commands)
-  - [Credit](#credit)
+- [System Diagram](#system-diagram)
+- [Pre-requisites:](#pre-requisites)
+  - [Master \& Slave Node:](#master--slave-node)
+  - [Master Node (Only):](#master-node-only)
+  - [Worker Node (Only):](#worker-node-only)
+- [Full Steps on Configuring the Cluster and Deploying ML Tasks on it](#full-steps-on-configuring-the-cluster-and-deploying-ml-tasks-on-it)
+  - [If metrics server is not working](#if-metrics-server-is-not-working)
+- [Useful Commands](#useful-commands)
+- [Credit](#credit)
 
 ## System Diagram
 
