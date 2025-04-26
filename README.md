@@ -250,7 +250,7 @@ kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
 Check this [blog](https://medium.com/@cloudspinx/fix-error-metrics-api-not-available-in-kubernetes-aa10766e1c2f) for more details.
 
 ## Useful Commands
-We have also gathered a [full list of useful commands](all-useful-commands.pdf) in this project for easy reference.
+We have also gathered a [full list of useful commands](all-useful-commands.pdf) in this project with the help of AI tools for easy reference.
 
 ## Credit
 
