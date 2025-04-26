@@ -20,19 +20,6 @@ def create_and_train_model():
     model.compile(optimizer='adam', loss='mse')
     model.fit(X, y, epochs=20, verbose=1)  # Small training loop for load testing
 
-    # Save model temporarily
-    model_path = "/tmp/trained_model"
-    model.save(model_path)
-    print(f"Model saved at {model_path}")
-
-    # Simulate usage for autoscaling impact
-    time.sleep(5)
-
-    # Delete model
-    if os.path.exists(model_path):
-        print("Deleting trained model...")
-        os.system(f"rm -rf {model_path}")
-
     print("Restarting training loop...\n")
     elapsed_time = time.time() - start_time  # End the timer and calculate elapsed time
     print(f"completed in {elapsed_time:.2f} seconds.\n")
