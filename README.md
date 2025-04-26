@@ -1,4 +1,4 @@
-# Cloud5296 Project Group18
+![image](https://github.com/user-attachments/assets/11b309f8-ae2b-4da9-a8b1-bb4907df84f7)# Cloud5296 Project Group18
 
 The project has followed the installation guideline from yeshwanthlm to initiate a k8s cluster with AWS EC2 instances. After setting up the cluster, a sample machine learning script has been deployed as a load test to the cluster. On the high level, the script will loop training a simple neural network model and delete it. Then, Horizontal Pod Autoscaling (HPA) is used to autoscale and provide load balancing services to the cluster.
 
@@ -10,9 +10,9 @@ The following guideline outlines the steps needed to set up a Kubernetes cluster
 * Ubuntu OS (Xenial or later)
 * sudo privileges
 * AWS Account
-* EC2 instances (>= 2GB ram per instance, 2 CPUs for master node/ control plane)
+* EC2 instances (>= 2GB ram per instance, 2 CPUs for master node/ control plane, 32GB storage for everything)
 
-### Master & Worker Node: 
+### Master & Slave Node: 
 Run the following commands on both the master and worker nodes to prepare them for kubeadm.
 
 ```bash
@@ -107,7 +107,7 @@ b) Generate a token for worker nodes to join:
 
 c) Expose port 6443 in the Security group for the Worker to connect to Master Node
 
-### Worker Node (Only):
+### Slave Node (Only):
 
 a) Run the following commands on the worker node.
 
@@ -121,6 +121,24 @@ Verify if it is working as expected!
 
 ```bash
 kubectl get nodes
+```
+
+## Install Docker for Machine Learning Task
+a) Snap is a package manager available on Ubuntu. There are many ways to install docker and snap is only one of them.
+
+```bash
+snap install docker
+```
+
+b) Then pull the tensorflow image
+
+```bash
+docker pull tensorflow/tensorflow:latest
+```
+
+c) Verify if the image has been pulled
+```bash
+docker images
 ```
 
 
