@@ -13,6 +13,8 @@ def create_and_train_model():
 
     # Define a simple model
     model = tf.keras.Sequential([
+        tf.keras.layers.Dense(128),
+        tf.keras.layers.Dense(128),
         tf.keras.layers.Dense(64, activation='relu'),
         tf.keras.layers.Dense(1)
     ])
