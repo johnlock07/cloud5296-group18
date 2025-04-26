@@ -206,18 +206,38 @@ Restarting it
 ```bash
 kubectl rollout restart deployment metrics-server -n kube-system
 ```
-For the deployment yaml, change the server port and set insecure tls, something like
-```baash
-    spec:
-      containers:
-      - args:
-        - --cert-dir=/tmp
-        - --secure-port=4443
-        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-        - --kubelet-use-node-status-port
-        - --metric-resolution=15s
-        - --kubelet-insecure-tls
+If the metrics server is still not available, configure its deployment, including:
+1. Add --kubelet-insecure-tls argument to containers args - used to skip verifying Kubelet CA certificates.
+2.Change the container port from 10250 to port 4443
+3. Add hostNetwork: true
+
+```bash
+kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
+{
+"op": "add",
+"path": "/spec/template/spec/hostNetwork",
+"value": true
+},
+{
+"op": "replace",
+"path": "/spec/template/spec/containers/0/args",
+"value": [
+"--cert-dir=/tmp",
+"--secure-port=4443",
+"--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname",
+"--kubelet-use-node-status-port",
+"--metric-resolution=15s",
+"--kubelet-insecure-tls"
+]
+},
+{
+"op": "replace",
+"path": "/spec/template/spec/containers/0/ports/0/containerPort",
+"value": 4443
+}
+]'
 ```
+
 Check this [blog](https://medium.com/@cloudspinx/fix-error-metrics-api-not-available-in-kubernetes-aa10766e1c2f) for more details.
 
 
