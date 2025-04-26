@@ -213,7 +213,7 @@ kubectl rollout restart deployment metrics-server -n kube-system
 ```
 If the metrics server is still not available, configure its deployment, including:
 1. Add --kubelet-insecure-tls argument to containers args - used to skip verifying Kubelet CA certificates.
-2.Change the container port from 10250 to port 4443
+2. Change the container port from 10250 to port 4443
 3. Add hostNetwork: true
 
 ```bash
