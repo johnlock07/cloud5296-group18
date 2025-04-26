@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/11b309f8-ae2b-4da9-a8b1-bb4907df84f7)# Cloud5296 Project Group18
+# Cloud5296 Project Group18
 
 The project has followed the installation guideline from yeshwanthlm to initiate a k8s cluster with AWS EC2 instances. After setting up the cluster, a sample machine learning script has been deployed as a load test to the cluster. On the high level, the script will loop training a simple neural network model and delete it. Then, Horizontal Pod Autoscaling (HPA) is used to autoscale and provide load balancing services to the cluster.
 
@@ -139,6 +139,86 @@ docker pull tensorflow/tensorflow:latest
 c) Verify if the image has been pulled
 ```bash
 docker images
+docker run --rm -it tensorflow/tensorflow:latest python -c "import tensorflow as tf; print(tf.__version__)"
 ```
+
+d) Create configmap for the ML script so that the tensorflow container could use it
+```bash
+kubectl create configmap tensorflow-script --from-file=train_and_delete.py
+```
+Verify if the configmap has been created
+```bash
+kubectl get configmap tensorflow-script -o yaml
+```
+
+e) Deploy the Machine learning training script
+```bash
+kubectl apply -f tensorflow-deployment.yaml
+```
+Commands for verifying the deployment
+```bash
+kubectl get pods
+kubectl describe pod -l app=tensorflow-training
+kubectl logs -l app=tensorflow-training --tail=50
+```
+
+e) Expose the deployment as a service
+```bash
+kubectl apply -f tensorflow-service.yaml
+```
+Commands for verifying the service
+```bash
+kubectl get svc
+kubectl describe svc tensorflow-service
+```
+
+f) Setup HPA for autoscaling and load balancing
+```bash
+kubectl autoscale deployment tensorflow-training --cpu-percent=50 --min=1 --max=10
+```
+Commands for verifying the HPA
+```bash
+kubectl get hpa
+kubectl describe hpa tensorflow-training
+```
+
+g) Monitor if the cluster autoscales and load balances according to workload
+```bash
+kubectl get hpa tensorflow-training
+kubectl describe hpa tensorflow-training
+kubectl top pods
+```
+We could manually scale the deployment as well for immediate validation, where x is the number of replicas
+```bash
+kubectl scale deployment tensorflow-training --replicas=x
+```
+
+extra) If metrics server is not working
+Verify if it is available
+```bash
+kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodes"
+kubectl top nodes
+kubectl top pods
+kubectl get apiservices | grep metrics
+kubectl describe apiservice v1beta1.metrics.k8s.io
+```
+Restarting it
+```bash
+kubectl rollout restart deployment metrics-server -n kube-system
+```
+For the deployment yaml, change the server port and set insecure tls, something like
+```baash
+    spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=4443
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+        - --kubelet-insecure-tls
+```
+Check this [blog](https://medium.com/@cloudspinx/fix-error-metrics-api-not-available-in-kubernetes-aa10766e1c2f) for more details.
+
 
 
