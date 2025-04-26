@@ -185,7 +185,7 @@ Fof HPA to function properly, we need to install the metrics server, which could
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
-Check [here](### If metrics server is not working) if the metics server is not working as expected.
+Check [here](#If metrics server is not working) if the metics server is not working as expected.
 
 g) Monitor if the cluster autoscales and load balances according to workload
 ```bash
