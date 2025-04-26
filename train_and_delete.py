@@ -7,24 +7,28 @@ def create_and_train_model():
     print("Starting model training...")
     start_time = time.time()  # Start the timer
 
-    # Sample dataset
-    X = np.random.rand(5000, 100)
-    y = np.random.rand(5000, 1)
+    X = np.random.rand(20000, 500)
+    y = np.random.rand(20000, 1)
 
-    # Define a simple model
+    # Model definition
     model = tf.keras.Sequential([
-        tf.keras.layers.Dense(128),
-        tf.keras.layers.Dense(128),
+        tf.keras.layers.Dense(512, activation='relu', input_shape=(500,)),
+        tf.keras.layers.Dense(512, activation='relu'),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(128, activation='relu'),
         tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
         tf.keras.layers.Dense(1)
     ])
     
     model.compile(optimizer='adam', loss='mse')
-    model.fit(X, y, epochs=20, verbose=1)  # Small training loop for load testing
-
-    print("Restarting training loop...\n")
+    model.fit(X, y, epochs=10, batch_size=128, verbose=1, validation_split=0.2)
     elapsed_time = time.time() - start_time  # End the timer and calculate elapsed time
     print(f"completed in {elapsed_time:.2f} seconds.\n")
+    
+    print("Restarting training loop...\n")
     time.sleep(2)  # Pause before next training cycle
 
 # Infinite training loop
